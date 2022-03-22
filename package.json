@@ -1,0 +1,29 @@
+{
+  "name": "odin-battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ship.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbusenba/odin-battleship.git"
+  },
+  "keywords": [
+    ""
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sbusenba/odin-battleship/issues"
+  },
+  "homepage": "https://github.com/sbusenba/odin-battleship#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "jest": "^27.5.1"
+  }
+}
