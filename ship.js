@@ -1,6 +1,5 @@
-const ship = (shipLength) => {
-  const x = 0; const y = 0; let facing; const length = shipLength; let xFactor; let yFactor;
-  facing = 'north';
+const ship = (x, y, facing, shipLength) => {
+  const length = shipLength; let xFactor; let yFactor;
   const parts = new Array(0);
   switch (facing) {
     case 'north':
@@ -30,13 +29,17 @@ const ship = (shipLength) => {
       hit: false,
     });
   }
-  const hit = (pos) => {
-    if (parts[pos].hit !== true) {
-      parts[pos].hit = true;
-      return true;
-    }
-    return 'illegal move';
+  const hit = (xPos, yPos) => {
+    let gotHit = false;
+    parts.forEach((part) => {
+      if ((part.x === xPos) && (part.y === yPos)) {
+        part.hit = true;
+        gotHit = true;
+      }
+    });
+    return gotHit;
   };
+
   const isSunk = () => {
     let sunk = true;
     for (let i = 0; i < length; i += 1) {

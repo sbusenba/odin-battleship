@@ -2,7 +2,7 @@
   "name": "odin-battleship",
   "version": "1.0.0",
   "description": "",
-  "main": "ship.js",
+  "main": "gameboard.js",
   "scripts": {
     "test": "jest"
   },
