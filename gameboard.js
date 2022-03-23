@@ -1,8 +1,19 @@
+const { isTSUnknownKeyword } = require('@babel/types');
 const ship = require('./ship');
 
 const gameboard = () => {
   const ships = [];
   const attacks = [];
+  const allSunk = () => {
+    let allShipsSunk = true;
+    ships.forEach((battleShip) => {
+      if (!battleShip.isSunk()) {
+        allShipsSunk = false;
+      }
+    });
+    return allShipsSunk;
+  };
+
   const placeShip = (x, y, facing, length) => {
     const battleShip = ship(x, y, facing, length);
     ships.push(battleShip);
@@ -23,7 +34,7 @@ const gameboard = () => {
     return result;
   };
   return {
-    ships, attacks, placeShip, receiveAttack,
+    ships, attacks, placeShip, receiveAttack, allSunk,
   };
 };
 

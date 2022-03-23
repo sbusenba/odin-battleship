@@ -24,4 +24,20 @@ describe('board with ship placed', () => {
   test('gameboard places multiple ships', () => {
     expect(testGameboard.placeShip(2, 0, 'north', 4)).toBeTruthy();
   });
+  test('allSunk() returns false when ships arent sunk', () => {
+    expect(testGameboard.allSunk()).toBe(false);
+  });
+});
+
+describe('board with ship placed', () => {
+  const testGameboard = gameboard();
+  testGameboard.placeShip(3, 0, 'north', 4);
+  testGameboard.receiveAttack(3, 0);
+  testGameboard.receiveAttack(3, 1);
+  testGameboard.receiveAttack(3, 2);
+  testGameboard.receiveAttack(3, 3);
+  console.log(testGameboard);
+  test('allSunk() returns true when ships arent sunk', () => {
+    expect(testGameboard.allSunk()).toBe(true);
+  });
 });
