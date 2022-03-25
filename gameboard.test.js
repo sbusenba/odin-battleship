@@ -10,7 +10,7 @@ test('gameboard can add ship', () => {
   expect(gameboard().placeShip(0, 0, 'north', 3)).toBeTruthy();
 });
 
-describe('board with ship placed', () => {
+describe('board with 2 ships placed', () => {
   const testGameboard = gameboard();
   testGameboard.placeShip(3, 0, 'north', 4);
   testGameboard.placeShip(0, 0, 'north', 4);
@@ -27,6 +27,12 @@ describe('board with ship placed', () => {
   test('allSunk() returns false when ships arent sunk', () => {
     expect(testGameboard.allSunk()).toBe(false);
   });
+  test('detects obstruction when placing ship', () => {
+    expect(testGameboard.placeShip(3, 0, 'north', 4)).toBe('obstructed');
+  });
+  test('detects obstruction when placing ship', () => {
+    expect(testGameboard.placeShip(3, 0, 'south', 4)).toBe('off board');
+  });
 });
 
 describe('board with ship placed', () => {
@@ -37,7 +43,7 @@ describe('board with ship placed', () => {
   testGameboard.receiveAttack(3, 2);
   testGameboard.receiveAttack(3, 3);
   console.log(testGameboard);
-  test('allSunk() returns true when ships arent sunk', () => {
+  test('allSunk() returns true when ships are sunk', () => {
     expect(testGameboard.allSunk()).toBe(true);
   });
 });

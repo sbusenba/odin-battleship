@@ -1,9 +1,18 @@
-const { isTSUnknownKeyword } = require('@babel/types');
 const ship = require('./ship');
 
 const gameboard = () => {
   const ships = [];
   const attacks = [];
+  const board = [['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', ''],
+    ['', '', '', '', '', '', '', '', '', '']];
   const allSunk = () => {
     let allShipsSunk = true;
     ships.forEach((battleShip) => {
@@ -13,11 +22,40 @@ const gameboard = () => {
     });
     return allShipsSunk;
   };
+  const onBoard = (battleShip) => {
+    let onBoardFlag = true;
+    battleShip.parts.forEach((part) => {
+      if ((part.x < 0) || (part.y < 0) || (part.x >= 10) || (part.y >= 10)) {
+        onBoardFlag = false;
+      }
+    });
+    return onBoardFlag;
+  };
+  const unObstructed = (battleShip) => {
+    let unObstructedFlag = true;
+    battleShip.parts.forEach((part) => {
+      if (board[part.x][part.y] !== '') {
+        unObstructedFlag = false;
+      }
+    });
+    return unObstructedFlag;
+  };
 
   const placeShip = (x, y, facing, length) => {
     const battleShip = ship(x, y, facing, length);
-    ships.push(battleShip);
-    return battleShip;
+    if (onBoard(battleShip) && unObstructed(battleShip)) {
+      ships.push(battleShip);
+      battleShip.parts.forEach((part) => {
+        board[part.x][part.y] = 'occupied';
+      });
+
+      return battleShip;
+    } if (!onBoard(battleShip)) {
+      return 'off board';
+    } if (!unObstructed(battleShip)) {
+      return 'obstructed';
+    }
+    return 'fail';
   };
 
   const receiveAttack = (attackX, attackY) => {
