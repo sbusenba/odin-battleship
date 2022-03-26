@@ -60,15 +60,25 @@ const gameboard = () => {
 
   const receiveAttack = (attackX, attackY) => {
     let result = 'miss';
-    if (attacks.includes({ attackX, attackY })) {
-      return 'Repeat Attack';
-    }
-    ships.forEach((attackedShip) => {
-      if (attackedShip.hit(attackX, attackY)) {
-        result = 'hit';
+    attacks.forEach((attack) => {
+      console.log(`${attack.attackX} & ${attackX}, ${attack.attackY} & ${attackY}`);
+      if ((attack.attackX === attackX) && (attack.attackY === attackY)) {
+        result = 'duplicate';
+        console.log('*Duplicate*');
       }
+      console.log(attack);
+      return result;
     });
 
+    if (result !== 'duplicate') {
+      ships.forEach((attackedShip) => {
+        if (attackedShip.hit(attackX, attackY)) {
+          result = 'hit';
+        }
+      });
+      board[attackX][attackY] = result;
+    }
+    attacks.push({ attackX, attackY, result });
     return result;
   };
   return {
