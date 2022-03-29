@@ -1,0 +1,23 @@
+.cell {
+    display:flex;
+    background-color: aqua;
+    height: 50px;
+    width: 50px;
+    border: 1px dotted darkblue;
+}
+.hit {background-color: firebrick;}
+.ship {
+    background-color: darkgray;
+}
+.row   {
+    display:flex;
+    flex-direction: row;
+}
+.gameboard{
+    display:flex;
+    flex-direction: column;
+}
+.boardholder {
+    margin:10px;
+    border: 1rem solid black;
+}

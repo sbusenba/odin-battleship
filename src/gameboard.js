@@ -1,6 +1,13 @@
 const ship = require('./ship');
 
 const gameboard = () => {
+  const shipsToPlace = [
+    { name: 'carrier', lenght: 5, quantity: 1 },
+    { name: 'battleship', lenght: 4, quantity: 2 },
+    { name: 'destroyer', lenght: 3, quantity: 3 },
+    { name: 'submarine', lenght: 3, quantity: 4 },
+    { name: 'patrol boat', lenght: 2, quantity: 5 },
+  ];
   const ships = [];
   const attacks = [];
   const board = [['', '', '', '', '', '', '', '', '', ''],
@@ -82,7 +89,7 @@ const gameboard = () => {
     return result;
   };
   return {
-    ships, attacks, placeShip, receiveAttack, allSunk,
+    ships, attacks, placeShip, receiveAttack, allSunk, board,
   };
 };
 

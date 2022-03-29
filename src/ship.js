@@ -3,20 +3,20 @@ const ship = (x, y, facing, shipLength) => {
   const parts = new Array(0);
   switch (facing) {
     case 'north':
-      xFactor = 0;
-      yFactor = 1;
-      break;
-    case 'south':
-      xFactor = 0;
-      yFactor = -1;
-      break;
-    case 'east':
       xFactor = 1;
       yFactor = 0;
       break;
-    case 'west':
+    case 'south':
       xFactor = -1;
       yFactor = 0;
+      break;
+    case 'east':
+      xFactor = 0;
+      yFactor = 1;
+      break;
+    case 'west':
+      xFactor = 0;
+      yFactor = -10;
       break;
     default:
       break;
