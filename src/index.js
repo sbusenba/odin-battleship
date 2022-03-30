@@ -42,8 +42,8 @@ opponent.makeMove(currentPlayer.board);
 opponent.makeMove(currentPlayer.board);
 opponent.makeMove(currentPlayer.board);
 // display update board
-board1.appendChild(display.render(player1.board, 'friendly'));
-board2.appendChild(display.render(player2.board, 'enemy'));
+board2.appendChild(display.render(player1.board, 'friendly'));
+board1.appendChild(display.render(player2.board, 'enemy'));
 // check for winners
 if (player1.board.allSunk === true) {
   winner = player2;

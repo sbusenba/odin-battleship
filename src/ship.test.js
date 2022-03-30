@@ -23,9 +23,9 @@ describe('ship with hits gets hit', () => {
   beforeEach(() => {
     testShip = ship(0, 0, 'north', 4);
     testShip.hit(0, 0);
-    testShip.hit(0, 1);
-    testShip.hit(0, 2);
-    testShip.hit(0, 3);
+    testShip.hit(1, 0);
+    testShip.hit(2, 0);
+    testShip.hit(3, 0);
     return testShip;
   });
 

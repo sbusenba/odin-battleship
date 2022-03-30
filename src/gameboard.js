@@ -76,9 +76,6 @@ const gameboard = () => {
           const placeY = Math.floor(Math.random() * 10);
           const facing = directions[Math.floor(Math.random() * 4)];
           placed = placeShip(placeX, placeY, facing, shipToPlace.length);
-          if (placed !== 'fail') {
-            console.log(`${shipToPlace.name} number ${i + 1} placed`);
-          }
         }
       }
     });
@@ -87,12 +84,10 @@ const gameboard = () => {
   const receiveAttack = (attackX, attackY) => {
     let result = 'miss';
     attacks.forEach((attack) => {
-      console.log(`${attack.attackX} & ${attackX}, ${attack.attackY} & ${attackY}`);
       if ((attack.attackX === attackX) && (attack.attackY === attackY)) {
         result = 'duplicate';
-        console.log('*Duplicate*');
       }
-      console.log(attack);
+
       return result;
     });
 
@@ -105,7 +100,6 @@ const gameboard = () => {
       board[attackX][attackY] = result;
     }
     attacks.push({ attackX, attackY, result });
-    console.log(`${attackX},${attackY} :${result}`);
     return result;
   };
   return {

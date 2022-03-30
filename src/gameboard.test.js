@@ -15,18 +15,16 @@ describe('board with 2 ships placed', () => {
   testGameboard.placeShip(3, 0, 'north', 4);
   testGameboard.placeShip(0, 0, 'north', 4);
   testGameboard.receiveAttack(0, 0);
-  console.log(testGameboard);
 
   test('gameboard can correctly record a hit', () => {
-    expect(testGameboard.receiveAttack(0, 1)).toBe('hit');
+    expect(testGameboard.receiveAttack(3, 0)).toBe('hit');
   });
   test('gameboard detects duplicate attack', () => {
-    console.log('attack #2');
     expect(testGameboard.receiveAttack(0, 0)).toBe('duplicate');
   });
 
   test('gameboard returns miss on miss', () => {
-    expect(testGameboard.receiveAttack(1, 0)).toBe('miss');
+    expect(testGameboard.receiveAttack(0, 2)).toBe('miss');
   });
   test('gameboard places multiple ships', () => {
     expect(testGameboard.placeShip(2, 0, 'north', 4)).toBeTruthy();
@@ -35,21 +33,21 @@ describe('board with 2 ships placed', () => {
     expect(testGameboard.allSunk()).toBe(false);
   });
   test('detects obstruction when placing ship', () => {
-    expect(testGameboard.placeShip(3, 0, 'north', 4)).toBe('obstructed');
+    expect(testGameboard.placeShip(3, 0, 'north', 4)).toBe('fail');
   });
   test('detects off Board when placing ship', () => {
-    expect(testGameboard.placeShip(3, 0, 'south', 4)).toBe('off board');
+    expect(testGameboard.placeShip(3, 0, 'south', 4)).toBe('fail');
   });
 });
 
 describe('board with ship placed', () => {
   const testGameboard = gameboard();
-  testGameboard.placeShip(3, 0, 'north', 4);
+  const ship = testGameboard.placeShip(3, 0, 'north', 4);
   testGameboard.receiveAttack(3, 0);
-  testGameboard.receiveAttack(3, 1);
-  testGameboard.receiveAttack(3, 2);
-  testGameboard.receiveAttack(3, 3);
-  console.log(testGameboard);
+  testGameboard.receiveAttack(4, 0);
+  testGameboard.receiveAttack(5, 0);
+  testGameboard.receiveAttack(6, 0);
+
   test('allSunk() returns true when ships are sunk', () => {
     expect(testGameboard.allSunk()).toBe(true);
   });
