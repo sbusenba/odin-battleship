@@ -2,13 +2,14 @@ const ship = require('./ship');
 
 const gameboard = () => {
   const shipsToPlace = [
-    { name: 'carrier', lenght: 5, quantity: 1 },
-    { name: 'battleship', lenght: 4, quantity: 2 },
-    { name: 'destroyer', lenght: 3, quantity: 3 },
-    { name: 'submarine', lenght: 3, quantity: 4 },
-    { name: 'patrol boat', lenght: 2, quantity: 5 },
+    { name: 'carrier', length: 5, quantity: 1 },
+    { name: 'battleship', length: 4, quantity: 2 },
+    { name: 'destroyer', length: 3, quantity: 3 },
+    { name: 'submarine', length: 3, quantity: 4 },
+    { name: 'patrol boat', length: 2, quantity: 5 },
   ];
   const ships = [];
+  const directions = ['north', 'south', 'east', 'west'];
   const attacks = [];
   const board = [['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
@@ -20,6 +21,7 @@ const gameboard = () => {
     ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', '']];
+
   const allSunk = () => {
     let allShipsSunk = true;
     ships.forEach((battleShip) => {
@@ -58,11 +60,28 @@ const gameboard = () => {
 
       return battleShip;
     } if (!onBoard(battleShip)) {
-      return 'off board';
+      return 'fail';
     } if (!unObstructed(battleShip)) {
-      return 'obstructed';
+      return 'fail';
     }
     return 'fail';
+  };
+
+  const placeAllShips = () => {
+    shipsToPlace.forEach((shipToPlace) => {
+      for (let i = 0; i < shipToPlace.quantity; i++) {
+        let placed = 'fail';
+        while ((placed === 'fail')) {
+          const placeX = Math.floor(Math.random() * 10);
+          const placeY = Math.floor(Math.random() * 10);
+          const facing = directions[Math.floor(Math.random() * 4)];
+          placed = placeShip(placeX, placeY, facing, shipToPlace.length);
+          if (placed !== 'fail') {
+            console.log(`${shipToPlace.name} number ${i + 1} placed`);
+          }
+        }
+      }
+    });
   };
 
   const receiveAttack = (attackX, attackY) => {
@@ -90,7 +109,7 @@ const gameboard = () => {
     return result;
   };
   return {
-    ships, attacks, placeShip, receiveAttack, allSunk, board,
+    ships, attacks, placeShip, receiveAttack, allSunk, board, placeAllShips,
   };
 };
 

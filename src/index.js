@@ -11,8 +11,8 @@ let currentPlayer = player1;
 let opponent = player2;
 const board1 = document.getElementById('board1');
 const board2 = document.getElementById('board2');
-player1.board.placeShip(1, 1, 'north', 4);
-player2.board.placeShip(1, 1, 'north', 4);
+player1.board.placeAllShips();
+player2.board.placeAllShips();
 console.log('ships placed');
 // each player places ships
 // current player takes shot
