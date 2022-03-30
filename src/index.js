@@ -14,14 +14,36 @@ const board2 = document.getElementById('board2');
 player1.board.placeShip(1, 1, 'north', 4);
 player2.board.placeShip(1, 1, 'north', 4);
 console.log('ships placed');
-board1.appendChild(display.render(player1.board, 'friendly'));
-board2.appendChild(display.render(player2.board, 'enemy'));
 // each player places ships
 // current player takes shot
 currentPlayer.makeMove(opponent.board);
+currentPlayer.makeMove(opponent.board);
+currentPlayer.makeMove(opponent.board);
+currentPlayer.makeMove(opponent.board);
+currentPlayer.makeMove(opponent.board);
+currentPlayer.makeMove(opponent.board);
+
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
+opponent.makeMove(currentPlayer.board);
 // display update board
-// board1.appendChild(display.render(player1.board, 'friendly'));
-// board2.appendChild(display.render(player2.board, 'enemy'));
+board1.appendChild(display.render(player1.board, 'friendly'));
+board2.appendChild(display.render(player2.board, 'enemy'));
 // check for winners
 if (player1.board.allSunk === true) {
   winner = player2;

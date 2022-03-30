@@ -8,16 +8,17 @@ const player = (playerName) => {
   const makeMove = (opponentBoard) => {
     let attackX; let attackY;
 
-    if (guesses === 'null') {
+    if (guesses == false) {
       attackX = Math.floor(Math.random() * 10);
       attackY = Math.floor(Math.random() * 10);
-      result = opponentBoard.makeMove(attackX, attackY);
+      result = opponentBoard.receiveAttack(attackX, attackY);
     } else if (guesses[0] === true) {
       const guess = guesses.pop();
       attackX = guess.attackX;
       attackY = guess.attackY;
-      result = opponentBoard.makeMove(attackX, attackY);
+      result = opponentBoard.receiveAttack(attackX, attackY);
     }
+    console.log(`${name} attacks ${attackX}, ${attackY}`);
     if (result === ('hit')) {
       guesses = [];
       if (attackX > 0) {

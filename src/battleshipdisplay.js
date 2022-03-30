@@ -10,9 +10,13 @@ const battleShipDisplay = () => {
         cell.setAttribute('data-x', indexX);
         cell.setAttribute('data-y', indexY);
         cell.classList.add('cell');
+        const marker = document.createElement('div');
+        marker.classList.add('marker');
         if (grid === 'hit') {
+          cell.appendChild(marker);
           cell.classList.add('hit');
         } else if (grid === 'miss') {
+          cell.appendChild(marker);
           cell.classList.add('miss');
         } else if ((grid === 'occupied') && (status === 'friendly')) {
           cell.classList.add('ship');

@@ -4,8 +4,23 @@
     height: 50px;
     width: 50px;
     border: 1px dotted darkblue;
+    align-items: center;
+    justify-content: center;
 }
-.hit {background-color: firebrick;}
+.marker {
+    height:20px;
+    width: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+
+}
+.miss>.marker {
+    background-color: blue;
+}
+.hit>.marker {background-color: darkred;}
+.hit {
+    background-color: red;
+}
 .ship {
     background-color: darkgray;
 }
@@ -20,4 +35,5 @@
 .boardholder {
     margin:10px;
     border: 1rem solid black;
+    width:fit-content;
 }

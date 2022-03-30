@@ -86,6 +86,7 @@ const gameboard = () => {
       board[attackX][attackY] = result;
     }
     attacks.push({ attackX, attackY, result });
+    console.log(`${attackX},${attackY} :${result}`);
     return result;
   };
   return {
