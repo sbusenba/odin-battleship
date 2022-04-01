@@ -3,10 +3,10 @@ const ship = require('./ship');
 const gameboard = () => {
   const shipsToPlace = [
     { name: 'carrier', length: 5, quantity: 1 },
-    { name: 'battleship', length: 4, quantity: 2 },
-    { name: 'destroyer', length: 3, quantity: 3 },
-    { name: 'submarine', length: 3, quantity: 4 },
-    { name: 'patrol boat', length: 2, quantity: 5 },
+    { name: 'battleship', length: 4, quantity: 1 },
+    { name: 'destroyer', length: 3, quantity: 1 },
+    { name: 'submarine', length: 3, quantity: 1 },
+    { name: 'patrol boat', length: 2, quantity: 1 },
   ];
   const ships = [];
   const directions = ['north', 'south', 'east', 'west'];
@@ -26,6 +26,7 @@ const gameboard = () => {
     let allShipsSunk = true;
     ships.forEach((battleShip) => {
       if (!battleShip.isSunk()) {
+        console.log(battleShip);
         allShipsSunk = false;
       }
     });
