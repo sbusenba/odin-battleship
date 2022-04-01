@@ -34,11 +34,40 @@ const player = (playerName) => {
       }
     }
   };
+  const volley = (opponentBoard, shots) => {
+    let attackX;
+    let attackY;
+    if (guesses.length === 0) {
+      for (let i = 0; i < shots; i += 1) {
+        attackX = Math.floor(Math.random() * 10);
+        attackY = Math.floor(Math.random() * 10);
+        result = opponentBoard.receiveAttack(attackX, attackY);
+        if (result === ('hit')) {
+          if (attackX > 0) {
+            guesses.push({ attackX: attackX - 1, attackY });
+          }
+          if (attackY > 0) {
+            guesses.push({ attackX, attackY: attackY - 1 });
+          }
+          if (attackX < 9) {
+            guesses.push({ attackX: attackX + 1, attackY });
+          }
+          if (attackY < 9) {
+            guesses.push({ attackX, attackY: attackY + 1 });
+          }
+        }
+      }
+    } else if (guesses.length > 0) {
+      for (let i = 0; i < shots; i += 1) {
+        makeMove(opponentBoard);
+      }
+    }
+  };
   const placeShips = () => {
 
   };
   return {
-    name, board, makeMove, placeShips,
+    name, board, makeMove, placeShips, volley,
   };
 };
 

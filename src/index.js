@@ -32,9 +32,8 @@ while (winner === null) {
   for (let i = 0; i < currentPlayerShots; i += 1) {
     currentPlayer.makeMove(opponent.board);
   }
-  for (let i = 0; i < opponentShots; i += 1) {
-    opponent.makeMove(currentPlayer.board);
-  }
+
+  opponent.volley(currentPlayer.board, opponentShots);
 
   while (board1.firstElementChild) {
     board1.removeChild(board1.firstChild);
