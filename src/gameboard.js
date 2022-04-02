@@ -70,7 +70,7 @@ const gameboard = () => {
 
   const placeAllShips = () => {
     shipsToPlace.forEach((shipToPlace) => {
-      for (let i = 0; i < shipToPlace.quantity; i++) {
+      for (let i = 0; i < shipToPlace.quantity; i += 1) {
         let placed = 'fail';
         while ((placed === 'fail')) {
           const placeX = Math.floor(Math.random() * 10);
@@ -103,8 +103,42 @@ const gameboard = () => {
     attacks.push({ attackX, attackY, result });
     return result;
   };
+  const queueAttack = (attackX, attackY) => {
+    let result = 'miss';
+    attacks.forEach((attack) => {
+      if ((attack.attackX === attackX) && (attack.attackY === attackY)) {
+        result = 'duplicate';
+      }
+    });
+
+    if (result !== 'duplicate') {
+      attacks.push({ attackX, attackY, result: 'queued' });
+    }
+  };
+  const applyQueuedAttacks = () => {
+    attacks.forEach((attack) => {
+      if (attack.result === 'queued') {
+        let result = 'miss';
+        ships.forEach((attackedShip) => {
+          if (attackedShip.hit(attack.attackX, attack.attackY)) {
+            result = 'hit';
+          }
+        });
+        board[attack.attackX][attack.attackY] = result;
+      }
+    });
+  };
+
   return {
-    ships, attacks, placeShip, receiveAttack, allSunk, board, placeAllShips,
+    ships,
+    attacks,
+    placeShip,
+    receiveAttack,
+    allSunk,
+    board,
+    placeAllShips,
+    queueAttack,
+    applyQueuedAttacks,
   };
 };
 
