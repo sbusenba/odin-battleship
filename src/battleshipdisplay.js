@@ -1,5 +1,5 @@
 const battleShipDisplay = () => {
-  const render = (gameboard, status) => {
+  const render = (gameboard, status, queueAttack) => {
     const board = document.createElement('div');
     board.classList.add('gameboard');
     gameboard.board.forEach((point, indexX) => {
@@ -10,6 +10,9 @@ const battleShipDisplay = () => {
         cell.setAttribute('data-x', indexX);
         cell.setAttribute('data-y', indexY);
         cell.classList.add('cell');
+        if (status === 'enemy') {
+          cell.addEventListener('click', queueAttack);
+        }
         const marker = document.createElement('div');
         marker.classList.add('marker');
         if (grid === 'hit') {
@@ -20,7 +23,10 @@ const battleShipDisplay = () => {
           cell.classList.add('miss');
         } else if ((grid === 'occupied') && (status === 'friendly')) {
           cell.classList.add('ship');
+        } else if (grid === 'queued') {
+          cell.appendChild(marker);
         }
+
         row.appendChild(cell);
       });
       board.appendChild(row);

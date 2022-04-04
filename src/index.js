@@ -11,14 +11,35 @@ const currentPlayer = player1;
 const opponent = player2;
 const board1 = document.getElementById('board1');
 const board2 = document.getElementById('board2');
+let queuedAttacks = 0;
+let currentPlayerShots = 0;
+let opponentShots = 0;
 player1.board.placeAllShips();
 player2.board.placeAllShips();
 console.log('ships placed');
-// each player places ships
-// current player takes shot
-while (winner === null) {
-  let currentPlayerShots = 0;
-  let opponentShots = 0;
+
+function queueAttack() {
+  opponent.board.queueAttack(this.getAttribute('data-x'), this.getAttribute('data-y'));
+  queuedAttacks += 1;
+
+  while (board1.firstElementChild) {
+    board1.removeChild(board1.firstChild);
+  }
+  while (board2.firstElementChild) {
+    board2.removeChild(board2.firstChild);
+  }
+  if (queuedAttacks === currentPlayerShots) {
+    opponent.board.applyQueuedAttacks();
+    opponent.volley(currentPlayer.board, opponentShots);
+    queuedAttacks = 0;
+  }
+
+  board1.appendChild(display.render(player2.board, 'enemy', queueAttack));
+  board2.appendChild(display.render(player1.board, 'friendly', queueAttack));
+
+  currentPlayerShots = 0;
+  opponentShots = 0;
+
   currentPlayer.board.ships.forEach((ship) => {
     if (!ship.isSunk()) {
       currentPlayerShots += 1;
@@ -29,26 +50,18 @@ while (winner === null) {
       opponentShots += 1;
     }
   });
-  for (let i = 0; i < currentPlayerShots; i += 1) {
-    currentPlayer.makeMove(opponent.board);
-  }
 
-  opponent.volley(currentPlayer.board, opponentShots);
-
-  while (board1.firstElementChild) {
-    board1.removeChild(board1.firstChild);
-  }
-  while (board2.firstElementChild) {
-    board2.removeChild(board2.firstChild);
-  }
-  board2.appendChild(display.render(player1.board, 'friendly'));
-  board1.appendChild(display.render(player2.board, 'enemy'));
-  alert('pause');
   if (player1.board.allSunk() === true) {
     winner = player2;
   } else if (player2.board.allSunk() === true) {
     winner = player1;
   }
 }
+function fire() {
 
-console.log(`${winner.name} Wins!`);
+}
+
+// each player places ships
+// current player takes shot
+board2.appendChild(display.render(player1.board, 'friendly', queueAttack));
+board1.appendChild(display.render(player2.board, 'enemy', queueAttack));

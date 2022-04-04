@@ -26,7 +26,6 @@ const gameboard = () => {
     let allShipsSunk = true;
     ships.forEach((battleShip) => {
       if (!battleShip.isSunk()) {
-        console.log(battleShip);
         allShipsSunk = false;
       }
     });
@@ -112,19 +111,23 @@ const gameboard = () => {
     });
 
     if (result !== 'duplicate') {
+      board[attackX][attackY] = 'queued';
       attacks.push({ attackX, attackY, result: 'queued' });
     }
   };
   const applyQueuedAttacks = () => {
     attacks.forEach((attack) => {
       if (attack.result === 'queued') {
-        let result = 'miss';
+        attack.result = 'miss';
         ships.forEach((attackedShip) => {
+          console.table(attackedShip.parts);
           if (attackedShip.hit(attack.attackX, attack.attackY)) {
-            result = 'hit';
+            console.log('hit!');
+            attack.result = 'hit';
           }
         });
-        board[attack.attackX][attack.attackY] = result;
+        console.log(attack.result);
+        board[attack.attackX][attack.attackY] = attack.result;
       }
     });
   };
