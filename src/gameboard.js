@@ -11,6 +11,7 @@ const gameboard = () => {
   const ships = [];
   const directions = ['north', 'south', 'east', 'west'];
   const attacks = [];
+  let queuedAttacks = [];
   const board = [['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
     ['', '', '', '', '', '', '', '', '', ''],
@@ -90,11 +91,12 @@ const gameboard = () => {
 
       return result;
     });
-
+    console.log(`receiving attack ${attackX}, ${attackY}`);
     if (result !== 'duplicate') {
       ships.forEach((attackedShip) => {
         if (attackedShip.hit(attackX, attackY)) {
           result = 'hit';
+          console.log(`hit! ${attackX},${attackY}!`);
         }
       });
       board[attackX][attackY] = result;
@@ -112,24 +114,14 @@ const gameboard = () => {
 
     if (result !== 'duplicate') {
       board[attackX][attackY] = 'queued';
-      attacks.push({ attackX, attackY, result: 'queued' });
+      queuedAttacks.push({ attackX, attackY, result: 'queued' });
     }
   };
   const applyQueuedAttacks = () => {
-    attacks.forEach((attack) => {
-      if (attack.result === 'queued') {
-        attack.result = 'miss';
-        ships.forEach((attackedShip) => {
-          console.table(attackedShip.parts);
-          if (attackedShip.hit(attack.attackX, attack.attackY)) {
-            console.log('hit!');
-            attack.result = 'hit';
-          }
-        });
-        console.log(attack.result);
-        board[attack.attackX][attack.attackY] = attack.result;
-      }
+    queuedAttacks.forEach((attack) => {
+      receiveAttack(attack.attackX, attack.attackY);
     });
+    queuedAttacks = [];
   };
 
   return {

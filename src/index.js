@@ -16,10 +16,11 @@ let currentPlayerShots = 0;
 let opponentShots = 0;
 player1.board.placeAllShips();
 player2.board.placeAllShips();
+console.table(player2.board.ships);
 console.log('ships placed');
 
 function queueAttack() {
-  opponent.board.queueAttack(this.getAttribute('data-x'), this.getAttribute('data-y'));
+  opponent.board.queueAttack(parseInt(this.getAttribute('data-x'), 10), parseInt(this.getAttribute('data-y'), 10));
   queuedAttacks += 1;
 
   while (board1.firstElementChild) {
@@ -34,8 +35,8 @@ function queueAttack() {
     queuedAttacks = 0;
   }
 
-  board1.appendChild(display.render(player2.board, 'enemy', queueAttack));
   board2.appendChild(display.render(player1.board, 'friendly', queueAttack));
+  board1.appendChild(display.render(player2.board, 'enemy', queueAttack));
 
   currentPlayerShots = 0;
   opponentShots = 0;
