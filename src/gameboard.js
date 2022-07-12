@@ -81,7 +81,15 @@ const gameboard = () => {
       }
     });
   };
-
+  
+  const nextShipToPlace =()=>{
+    console.log(shipsToPlace)
+    return shipsToPlace.shift()
+  }
+  const hasShipsToPlace =()=>{
+    console.log(shipsToPlace.length + " ships to place")
+    return ((shipsToPlace.length > 0)? true : false);
+  }
   const receiveAttack = (attackX, attackY) => {
     let result = 'miss';
     attacks.forEach((attack) => {
@@ -92,7 +100,7 @@ const gameboard = () => {
       return result;
     });
     console.log(`receiving attack ${attackX}, ${attackY}`);
-    if (result !== 'duplicate') {
+    if (result !== 'duplicate') { 
       ships.forEach((attackedShip) => {
         if (attackedShip.hit(attackX, attackY)) {
           result = 'hit';
@@ -133,6 +141,8 @@ const gameboard = () => {
     board,
     placeAllShips,
     queueAttack,
+    hasShipsToPlace,
+    nextShipToPlace,
     applyQueuedAttacks,
   };
 };

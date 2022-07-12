@@ -1,5 +1,5 @@
 const battleShipDisplay = () => {
-  const render = (gameboard, status, queueAttack) => {
+  const render = (gameboard, status, queueAttack,dropShip) => {
     const board = document.createElement('div');
     board.classList.add('gameboard');
     gameboard.board.forEach((point, indexX) => {
@@ -7,9 +7,14 @@ const battleShipDisplay = () => {
       row.classList.add('row');
       gameboard.board[indexX].forEach((grid, indexY) => {
         const cell = document.createElement('div');
+        cell.setAttribute('draggable', true);
+        cell.addEventListener('dragenter',(e)=>{e.preventDefault()})
+        cell.addEventListener('dragover',(e)=>{e.preventDefault()})
+        cell.addEventListener('drop',dropShip)
         cell.setAttribute('data-x', indexX);
         cell.setAttribute('data-y', indexY);
         cell.classList.add('cell');
+      
         if (status === 'enemy') {
           cell.addEventListener('click', queueAttack);
         }
