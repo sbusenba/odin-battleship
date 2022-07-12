@@ -7,9 +7,12 @@ const shipPicker = ()=>{
         display.style.backgroundColor= "azure";
         let shipDisplay = document.createElement("div")
         shipDisplay.classList.add('draggable-ship')
+
+        shipDisplay.setAttribute('draggable',true)
         for (let i=0;i<ship.length;i++){
             const cell = document.createElement('div');
             cell.classList.add("cell")
+            cell.classList.add("ship")
             shipDisplay.appendChild(cell)
         }
         shipDisplay.style.display= 'flex';

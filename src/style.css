@@ -20,6 +20,7 @@
     align-self: center;
     justify-self: center;
     flex-direction: column;
+    cursor:move;
 }
 
 .marker {
