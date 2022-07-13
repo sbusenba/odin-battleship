@@ -16,7 +16,7 @@ const ship = (x, y, facing, shipLength) => {
       break;
     case 'west':
       xFactor = 0;
-      yFactor = -10;
+      yFactor = -1;
       break;
     default:
       break;
