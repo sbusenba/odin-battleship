@@ -13,6 +13,8 @@ const opponent = player2;
 const board1 = document.getElementById('board1');
 const board2 = document.getElementById('board2');
 const consoleDisplay = document.querySelector('.console')
+let dragAdjust =0;
+let shipOrientation = 'north';
 let queuedAttacks = 0;
 let currentPlayerShots = 0;
 let opponentShots = 0;
@@ -72,12 +74,30 @@ function acceptClick() {
   }
   }
 }
+function startDrag (e){
+
+  console.log(e.target)
+  dragAdjust = e.target.getAttribute('data-index')
+  shipOrientation = (e.target.parentNode.style.flexDirection =='column')? 'north': 'west'
+  console.log(dragAdjust, shipOrientation)
+}
+
 function acceptDrag (e){
   if (shipToPlace) {
     e.preventDefault()
-    console.log(e)
-    console.log(parseInt(e.target.getAttribute('data-x'), 10), parseInt(e.target.getAttribute('data-y'), 10))
-    if (player1.board.placeShip(parseInt(e.target.getAttribute('data-x'), 10),parseInt(e.target.getAttribute('data-y'), 10),'north',shipToPlace.length) != 'fail'){
+    let tempX = parseInt(e.target.getAttribute('data-x'), 10) 
+    let tempY = parseInt(e.target.getAttribute('data-y'), 10) 
+    if (shipOrientation === "north"){
+      tempX = tempX - dragAdjust
+    } else {
+      tempY = tempY- dragAdjust
+
+    }
+    console.log (tempX+" , "+tempY + " "+shipOrientation )
+
+
+
+    if (player1.board.placeShip(tempX,tempY,shipOrientation,shipToPlace.length) != 'fail'){
       while (board1.firstChild){
         board1.removeChild(board1.firstChild)
       }
@@ -88,13 +108,11 @@ function acceptDrag (e){
         consoleDisplay.removeChild(consoleDisplay.firstChild)
       }
       
-        console.log('ships to place!')
         if (player1.board.hasShipsToPlace()){
         shipToPlace = player1.board.nextShipToPlace();
-        console.table(shipToPlace)
         board2.appendChild(display.render(player1.board, 'friendly', acceptClick,acceptDrag));
 
-        consoleDisplay.appendChild(shipDisplay(shipToPlace))
+        consoleDisplay.appendChild(shipDisplay(shipToPlace,startDrag))
         }else {
           board2.appendChild(display.render(player1.board, 'friendly', acceptClick,acceptDrag));
           board1.appendChild(display.render(player2.board, 'enemy', acceptClick,acceptDrag));
@@ -114,6 +132,8 @@ function acceptDrag (e){
             opponentShots += 1;
           }
       });
+  } else {
+    console.log('ship place fail')
   }
 
 }
@@ -124,7 +144,7 @@ function acceptDrag (e){
 // current player takes shot
 if (player1.board.hasShipsToPlace) {
 board2.appendChild(display.render(player1.board, 'friendly', acceptClick,acceptDrag));
-consoleDisplay.appendChild(shipDisplay(shipToPlace))
+consoleDisplay.appendChild(shipDisplay(shipToPlace,startDrag))
 } else {
   board2.appendChild(display.render(player1.board, 'friendly', acceptClick,acceptDrag));
   board1.appendChild(display.render(player2.board, 'enemy', acceptClick,acceptDrag));

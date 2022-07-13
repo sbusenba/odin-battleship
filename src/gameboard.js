@@ -61,8 +61,10 @@ const gameboard = () => {
 
       return battleShip;
     } if (!onBoard(battleShip)) {
+      console.log('off board')
       return 'fail';
     } if (!unObstructed(battleShip)) {
+      console.log('obstructed')
       return 'fail';
     }
     return 'fail';
@@ -83,11 +85,9 @@ const gameboard = () => {
   };
   
   const nextShipToPlace =()=>{
-    console.log(shipsToPlace)
     return shipsToPlace.shift()
   }
   const hasShipsToPlace =()=>{
-    console.log(shipsToPlace.length + " ships to place")
     return ((shipsToPlace.length > 0)? true : false);
   }
   const receiveAttack = (attackX, attackY) => {
