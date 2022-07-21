@@ -51,8 +51,8 @@ const gameboard = () => {
     return unObstructedFlag;
   };
 
-  const placeShip = (x, y, facing, length) => {
-    const battleShip = ship(x, y, facing, length);
+  const placeShip = (x, y, facing, length,name) => {
+    const battleShip = ship(x, y, facing, length,name);
     if (onBoard(battleShip) && unObstructed(battleShip)) {
       ships.push(battleShip);
       battleShip.parts.forEach((part) => {
@@ -78,7 +78,7 @@ const gameboard = () => {
           const placeX = Math.floor(Math.random() * 10);
           const placeY = Math.floor(Math.random() * 10);
           const facing = directions[Math.floor(Math.random() * 4)];
-          placed = placeShip(placeX, placeY, facing, shipToPlace.length);
+          placed = placeShip(placeX, placeY, facing, shipToPlace.length,shipToPlace.name);
         }
       }
     });
