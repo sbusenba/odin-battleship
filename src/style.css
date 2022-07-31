@@ -10,11 +10,10 @@
 .ship-display{
     display:flex;
     flex-direction: column;
-    height:320px;
-    width:320px;
-    margin:10px;
-    border: 1rem solid black;
-    
+    flex:auto;
+    height: 320px;
+    width: 320px;
+    margin:0;
 }
 span{
     font-style: italic;
@@ -70,12 +69,21 @@ h1{
 .boardholder {
     margin:10px;
     border: 1rem solid black;
-    width:fit-content;
+    height:320px;
+    width:320px;
 }
 .coms {
     margin:10px;
     overflow: auto;
     background-color: aliceblue;
+    border: 1rem solid black;
+    height:320px;
+    width:320px;
+}
+.controls {
+    margin:10px;
+    overflow: auto;
+    background-color: rgb(13, 73, 126);
     border: 1rem solid black;
     height:320px;
     width:320px;
