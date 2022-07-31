@@ -5,8 +5,6 @@ const shipPicker = ()=>{
     const render = (ship,startDragFunc)=>{
         let display = document.createElement("div")
         display.classList.add("ship-display")
-        display.style.height = '200px';
-        display.style.width = '200px';
         display.style.backgroundColor= "azure";
         let shipDisplay = document.createElement("div")
         shipDisplay.classList.add('draggable-ship')
