@@ -14,6 +14,7 @@
     height: 320px;
     width: 320px;
     margin:0;
+    background-color: aqua;
 }
 span{
     font-style: italic;
@@ -71,6 +72,7 @@ h1{
     border: 1rem solid black;
     height:320px;
     width:320px;
+    background-color: darkgrey;
 }
 .coms {
     margin:10px;

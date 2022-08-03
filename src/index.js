@@ -199,7 +199,7 @@ function acceptDrag (e){
 
 
 
-board1.style.display = 'none';
+//board1.style.display = 'none';
 board2.appendChild(display.render(player1.board, 'friendly', acceptClick,acceptDrag));
 consoleDisplay.appendChild(shipDisplay(shipToPlace,startDrag))
 
