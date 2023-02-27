@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=320px, initial-scale=1.0">
     <title>BattleShip</title>
     <link rel="stylesheet" href="../src/style.css">
 </head>
@@ -12,19 +12,21 @@
         <h1>BattleShip <span>Volley</span></h1>
     </div>
     <div id="game-display">
-        <div>
-            <div id="board1" class="boardholder">
-
-            </div>
-            <div id="board2" class="boardholder">
-
+        <button id="top-button">click</button>
+        <div class = 'top-display display'>
+            <div class = 'top-display-cube'>
+                <div id="board1" class="top-board boardholder cube-face"></div>
+                <div id ="board1-b" class="coms boardholder cube-face">
             </div>
         </div>
-        <div>
-            <div class="coms">
-            </div>
-            <div class="controls"></div>
         </div>
+        <div class='bottom-display display'>
+            <div class="bottom-display-cube">    
+                <div id="board2" class="bottom-board boardholder cube-face"></div>
+                <div id ='board2-b' class="controls boardholder cube-face"></div>
+            </div>
+        </div>
+        <button id="bottom-button">click</button>
     </div>    
     <script src="main.js"></script>
 </body>

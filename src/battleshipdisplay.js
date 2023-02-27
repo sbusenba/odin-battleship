@@ -7,7 +7,7 @@ const battleShipDisplay = () => {
       row.classList.add('row');
       gameboard.board[indexX].forEach((grid, indexY) => {
         const cell = document.createElement('div');
-        cell.setAttribute('draggable', true);
+        cell.setAttribute('draggable', false);
         cell.addEventListener('dragenter',(e)=>{e.preventDefault()})
         cell.addEventListener('dragover',(e)=>{e.preventDefault()})
         cell.addEventListener('drop',dropShip)
